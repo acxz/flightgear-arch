@@ -1,0 +1,33 @@
+pkgbase = flightgear-git
+	pkgdesc = An open-source, multi-platform flight simulator
+	pkgver = 2020.4.0r15376.4e432b3f8
+	pkgrel = 1
+	url = https://home.flightgear.org
+	arch = x86_64
+	license = GPL
+	makedepends = boost
+	makedepends = cmake
+	makedepends = git
+	makedepends = mesa
+	makedepends = sharutils
+	makedepends = simgear
+	makedepends = qt5-base
+	makedepends = qt5-declarative
+	makedepends = qt5-svg
+	depends = libxmu
+	depends = libxi
+	depends = zlib
+	depends = openscenegraph
+	depends = libxrandr
+	depends = glu
+	depends = openal
+	optdepends = qt5-base: fgfs --launcher
+	optdepends = qt5-declarative: fgfs --launcher
+	optdepends = flightgear-data
+	provides = flightgear=2020.4.0r15376.4e432b3f8
+	conflicts = flightgear
+	source = flightgear::git+https://git.code.sf.net/p/flightgear/flightgear#branch=next
+	sha256sums = SKIP
+
+pkgname = flightgear-git
+
