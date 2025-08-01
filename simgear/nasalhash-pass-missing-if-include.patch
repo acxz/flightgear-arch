@@ -1,0 +1,12 @@
+diff --git a/simgear/nasal/cppbind/NasalHash.hxx b/simgear/nasal/cppbind/NasalHash.hxx
+index aac672fd..2ee7d044 100644
+--- a/simgear/nasal/cppbind/NasalHash.hxx
++++ b/simgear/nasal/cppbind/NasalHash.hxx
+@@ -24,6 +24,7 @@
+ 
+ #include <simgear/std/type_traits.hxx>
+ #include <simgear/structure/map.hxx>
++#include <boost/mpl/if.hpp>
+ #include <boost/iterator/iterator_facade.hpp>
+ 
+ namespace nasal

@@ -1,0 +1,42 @@
+diff --git a/3rdparty/iaxclient/lib/audio_openal.h b/3rdparty/iaxclient/lib/audio_openal.h
+index a698235..de7cbc8 100644
+--- a/3rdparty/iaxclient/lib/audio_openal.h
++++ b/3rdparty/iaxclient/lib/audio_openal.h
+@@ -1,6 +1,6 @@
+ #ifndef _AUDIO_OPENAL_H
+ #define _AUDIO_OPENAL_H
+ 
+-int openal_initialize();
++int openal_initialize(struct iaxc_audio_driver *d, int sample_rate);
+ 
+ #endif
+diff --git a/3rdparty/iaxclient/lib/iaxclient_lib.c b/3rdparty/iaxclient/lib/iaxclient_lib.c
+index 761dee4..ae2c43f 100644
+--- a/3rdparty/iaxclient/lib/iaxclient_lib.c
++++ b/3rdparty/iaxclient/lib/iaxclient_lib.c
+@@ -47,6 +47,10 @@
+ #include "audio_alsa.h"
+ #endif
+ 
++#ifdef AUDIO_OPENAL
++  #include "audio_openal.h"
++#endif
++
+ #define IAXC_ERROR  IAXC_TEXT_TYPE_ERROR
+ #define IAXC_STATUS IAXC_TEXT_TYPE_STATUS
+ #define IAXC_NOTICE IAXC_TEXT_TYPE_NOTICE
+diff --git a/3rdparty/iaxclient/lib/iaxclient_lib.h b/3rdparty/iaxclient/lib/iaxclient_lib.h
+index 91776c3..d98dc45 100644
+--- a/3rdparty/iaxclient/lib/iaxclient_lib.h
++++ b/3rdparty/iaxclient/lib/iaxclient_lib.h
+@@ -242,10 +242,6 @@ struct iaxc_call {
+ 
+ #include "audio_file.h"
+ 
+-#ifdef AUDIO_OPENAL
+-  #include "audio_openal.h"
+-#endif
+-
+ extern int iaxci_audio_output_mode;
+ 
+ int iaxci_post_event_callback(iaxc_event e);

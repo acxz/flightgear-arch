@@ -7,24 +7,25 @@
 # Contributor: Edoardo Morandi <morandidodo@gmail.com>
 
 pkgname=simgear
-pkgver=2020.3.19
+pkgver=2024.1.1
 _pkgver=${pkgver%.*}
-pkgrel=3
+pkgrel=1
 pkgdesc="A set of open-source libraries designed to be used as building blocks for quickly assembling 3d simulations, games, and visualization applications."
 arch=('x86_64')
 url="http://home.flightgear.org/"
 license=('GPL')
 depends=('glu' 'glut' 'freealut' 'plib' 'openscenegraph')
 makedepends=('boost' 'cmake' 'mesa')
-source=("${pkgname}-${pkgver}.tar.bz2"::"https://downloads.sourceforge.net/project/flightgear/release-${_pkgver}/${pkgname}-${pkgver}.tar.bz2"
-        "compositor-pass-missing-array-include.patch")
-sha256sums=('3b937c5b94422478e5d79114bdcd6c78e43a0a6ffba97544a86d441c3f9e8c3a'
-            '81f817ba0f54952ac5fea32ec717275cdb9804f9801def9ae1a00f019bcf968b')
+source=("${pkgname}-${pkgver}.tar.bz2"::"https://gitlab.com/flightgear/fgmeta/-/jobs/9264813015/artifacts/raw/sgbuild/${pkgname}-${pkgver}.tar.bz2"
+        "nasalhash-pass-missing-if-include.patch")
+sha256sums=('b0613b8b606697faa42a5839590927f6b82ca2f6ec198a7bfa5fe16045696069'
+            '7c7d4b3065c687042cade9bbc09e01727c46c4a6ae42826d1b129294d67ce4bb')
 
 prepare() {
-    cd "$pkgname-$pkgver"
-    patch --forward --strip=1 --input="${srcdir}/compositor-pass-missing-array-include.patch"
+  cd "$pkgname-$pkgver"
+  patch --forward --strip=1 --input="${srcdir}/nasalhash-pass-missing-if-include.patch"
 }
+
 
 build() {
   mkdir -p "$srcdir"/sgbuild
@@ -33,6 +34,7 @@ build() {
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DSIMGEAR_SHARED=ON \
     -DENABLE_TESTS=OFF \
+    -DCMAKE_BUILD_TYPE=Release \
     ../simgear-${pkgver}
   make
 }
